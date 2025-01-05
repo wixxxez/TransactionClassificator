@@ -1,10 +1,13 @@
 
 from aiogram import Bot, Dispatcher, Router, types , F
 from aiogram.filters import CommandStart , Command
+from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 
 import logging
 from ..utils.ConfigLoader import LoadUserConfigById
 from ..utils.Singleton import thread_safe_singleton
+from ..utils.DataAquisitionJob import DataAcquisitionPipeline
 dp = Dispatcher()
 
 async def on_startup():
@@ -36,10 +39,26 @@ async def start_bot(config):
 
 @dp.message(Command('start'))
 async def start(message: types.Message):
-    await message.answer(text= "Hi")
+
+    keyboard = ReplyKeyboardBuilder()
+    keyboard.row(KeyboardButton(text ="Load Data."))
+
+    await message.answer(text= "Welcome. Choose an option!", reply_markup= keyboard.as_markup(one_time_keyboard = True, resize_keyboard = True))
+
+@dp.message(F.text == "Load Data.")
+async def instruction(message: types.Message):
+    user_id =  message.from_user.id 
+    bot = BotSubsystem()
+
+    user_cfg = LoadUserConfigById(bot.config, user_id)
+    pipeline = DataAcquisitionPipeline(**user_cfg)
+    pipeline.run()
+    await message.answer(  "Data is saved"   )
+     
+
 
 @dp.message()
-async def profil(message: types.Message):
+async def echo(message: types.Message):
 
     user_id =  message.from_user.id 
     bot = BotSubsystem()
