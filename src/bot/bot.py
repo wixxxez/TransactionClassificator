@@ -8,7 +8,10 @@ import logging
 from ..utils.ConfigLoader import LoadUserConfigById
 from ..utils.Singleton import thread_safe_singleton
 from ..utils.DataAquisitionJob import DataAcquisitionPipeline
+from .security.WhiteListMiddleware import WhiteListMiddleware
+
 dp = Dispatcher()
+ 
 
 async def on_startup():
     print("WAKE UP")
@@ -32,6 +35,7 @@ async def start_bot(config):
 
     # Set up logging
     logging.basicConfig(level=logging.INFO)
+    dp.message.middleware(WhiteListMiddleware(config))
 
     bot_object = BotSubsystem(config)
     bot = bot_object.create_bot()
@@ -42,8 +46,12 @@ async def start(message: types.Message):
 
     keyboard = ReplyKeyboardBuilder()
     keyboard.row(KeyboardButton(text ="Load Data."))
+    user_id =  message.from_user.id 
+    
+    bot = BotSubsystem()
 
-    await message.answer(text= "Welcome. Choose an option!", reply_markup= keyboard.as_markup(one_time_keyboard = True, resize_keyboard = True))
+    user_cfg = LoadUserConfigById(bot.config, user_id)
+    await message.answer(text= f"Welcome {user_cfg['name']}. Choose an option!", reply_markup= keyboard.as_markup(one_time_keyboard = False, resize_keyboard = True))
 
 @dp.message(F.text == "Load Data.")
 async def instruction(message: types.Message):
