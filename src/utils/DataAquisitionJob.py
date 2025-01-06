@@ -65,7 +65,7 @@ class DataPreprocessing():
         mono_df["week_number"] = mono_df['time'].apply( lambda x : datetime.fromtimestamp(x).isocalendar()[1]) 
         mono_df = mono_df[['id','time','description','originalMcc', 'amount','receiptId','type','full_date','month_number','week_number']]
         mono_df['full_date'] = mono_df['full_date'].apply(lambda x: x.replace('.','-'))
-        # mono_df['full_date']  = pd.to_datetime(mono_df['full_date'])
+        mono_df['full_date'] = pd.to_datetime(mono_df['full_date'], format='%d-%m-%Y')
         mono_df['user_name'] = self.name
         mono_df['telegram_id'] = self.telegram_id
 
@@ -76,6 +76,9 @@ def save_data(data: pd.DataFrame):
     old_data = pd.read_csv("./datasets/transaction_history.csv", index_col=0) 
 
     pd.concat([old_data, data]).drop_duplicates('id').to_csv("./datasets/transaction_history.csv")
+
+
+    
 class DataAcquisitionPipeline():
 
     def __init__(self, id, name, monobank_token, monobank_account): 

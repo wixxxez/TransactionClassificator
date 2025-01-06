@@ -13,5 +13,6 @@ def load_config(config_path):
 def LoadUserConfigById(cfg, id): 
 
     users = cfg['users']
-    print(users)
-    return [i  for i in users if id == i['id'] ][0]
+    
+    user_info = [i  for i in users if id == i['id'] ]
+    return user_info[0]

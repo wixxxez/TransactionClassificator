@@ -16,17 +16,19 @@ class WhiteListMiddleware(BaseMiddleware):
             data: Dict[str, Any]
         ) -> Any:
             id = event.from_user.id
-            if self.is_user_banned(id):
+            if self.is_user_not_allowed(id):
                 await event.reply(f"You are not allowed to use this bot. ID {id} not in white list. ")
                 return 
             return await handler(event, data)
 
-    def is_user_banned(self, id: int) -> bool:
-        # Implement your logic to check if the user is banned
-        
+    def is_user_not_allowed(self, id: int) -> bool:
+
 
         whitelist = self.config['whitelist']
         
         whitelist_users = [id for id in whitelist ]
 
-        return id in whitelist_users
+        users = [i['id'] for i in whitelist ]
+        
+       
+        return id not in users
