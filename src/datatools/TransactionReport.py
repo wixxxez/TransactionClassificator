@@ -1,5 +1,6 @@
 import pandas as pd
 import time
+from datetime import datetime
 
 class Dataset():
 
@@ -14,7 +15,7 @@ class Dataset():
 
         self.data = pd.read_csv(self.config['transaction_path'])
         self.mcc = pd.read_csv(self.config['mcc_code_path'])
-        self.Balances = pd.read_csv(self.config['balance_table_path']) 
+        self.Balances = pd.read_csv(self.config['balances_table_path']) 
 
         custom_categories = {
                     'MCC_Categories' :  [{'originalMcc' : '5812', 'custom_category': 'Харчування'},{'originalMcc' : '5499', 'custom_category': 'Харчування'},{'originalMcc' : '5411', 'custom_category': 'Харчування'}],
@@ -34,6 +35,9 @@ class Dataset():
         self.dataset = data_full
         return self.dataset
 
+    def get_balances(self): 
+
+        return self.Balances
 
 class OverallTransactionReport():
 
@@ -43,8 +47,11 @@ class OverallTransactionReport():
 
     def get_markdown_response(self) : 
 
-        current_week = int(time.strftime('%w'))
-        dataset = self.dataset.query("week_number == @current_week").groupby( ['user_name', 'Business group', 'custom_category'] ).amount.sum().to_frame()
+         
+        today = datetime.today()
+        current_week = today.isocalendar()[1]
+ 
+        dataset = self.dataset.query("week_number == @current_week").groupby( ['user_name', 'custom_category'] ).amount.sum().to_frame()
 
         if len(dataset) == 0: 
 
@@ -54,6 +61,49 @@ class OverallTransactionReport():
     
     def get_Weekly_balance_report(self) : 
 
+        data_full = self.dataset
+        Balances = self.balance
 
-        return 0
+        Weekly = data_full.query("week_number == 1").groupby( ['custom_category'] ).amount.sum().reset_index().merge(Balances.query('Period == "w"'),how='right')
+        Weekly = Weekly.fillna(0)
+        balance_report_body_list = []
+        for category in Weekly.custom_category.unique():
+
+            category_df = Weekly.query("custom_category == @category")
+
+            availible = category_df['Balance'] -category_df['amount']
+            availible = availible[0]
+            if availible > 0 : 
+                balance_report_body = f"For category {category}. You have {availible}. UAH"
+
+            else :
+                balance_report_body = f"For category {category}. You exceeded the weekly limit."
+
+            balance_report_body_list.append(balance_report_body)
+        return Weekly.to_markdown(), balance_report_body_list
+    
+    def get_month_balance_report(self): 
+        data_full = self.dataset
+        Balances = self.balance
+        today = datetime.today()
+        current_month = today.month
+
+        Monthly = data_full.query("month_number == @current_month").groupby( ['custom_category'] ).amount.sum().reset_index().merge(Balances.query('Period == "m"'),how='right')
+        Monthly = Monthly.fillna(0)
+
+        balance_report_body_list = []
+        for category in Monthly.custom_category.unique():
+
+            category_df = Monthly.query("custom_category == @category")
+
+            availible = category_df['Balance'] -category_df['amount']
+            availible = availible.reset_index()[0][0]
+            if availible > 0 : 
+                balance_report_body = f"For category {category}. You have {availible} UAH."
+
+            else :
+                balance_report_body = f"For category {category}. You exceeded the monthly limit."
+            balance_report_body_list.append(balance_report_body)
+        return Monthly.to_markdown(), balance_report_body_list
+
     

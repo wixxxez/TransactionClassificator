@@ -16,3 +16,7 @@ def LoadUserConfigById(cfg, id):
     
     user_info = [i  for i in users if id == i['id'] ]
     return user_info[0]
+
+def LoadAllUsersCFG(cfg):
+
+    return cfg['users']
