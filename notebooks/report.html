@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Report</title>
+    <link rel="stylesheet" 
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <style>
+        /* Smooth Collapse Transition */
+        .custom-collapse 
+     .custom-collapse {
+            transition: height 0.5s ease-out, opacity 0.5s ease-out;
+            overflow: hidden;
+            opacity: 0;
+        }
+        
+        .custom-collapse.show {
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-4">
+        <h1 class="text-center text-primary">Weekly report</h1>
+        
+        <div class="card shadow-sm p-4 mt-4">
+            <h2 class="text-secondary">Transaction details</h2>
+            
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            
+            <th>Category</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+        <!-- Main Row -->
+        <tr data-bs-toggle="collapse" data-bs-target="#collapse0" style="cursor: pointer;">
+            <td><strong>Квартплата</strong></td>
+            <td>7000</td>
+        </tr>
+        <!-- Collapsible Row with Nested Table -->
+        <tr>
+            <td colspan="2">
+                <div id="collapse0" class="collapse custom-collapse">
+                    <div class="p-3 border rounded bg-light">
+                        <table class='table table-bordered'><thead><tr><th>Username</th><th>Date</th><th>Description</th><th>Amount</th></tr></thead><tbody><tr><td>Artem</td><td>2025-01-02</td><td>Петро С.</td><td>7000</td></tr></tbody></table>
+
+                         
+                    </div>
+                </div>
+            </td>
+        </tr>
+         
+    
+        <!-- Main Row -->
+        <tr data-bs-toggle="collapse" data-bs-target="#collapse1" style="cursor: pointer;">
+            <td><strong>Онлайн-майданчики</strong></td>
+            <td>2713</td>
+        </tr>
+        <!-- Collapsible Row with Nested Table -->
+        <tr>
+            <td colspan="2">
+                <div id="collapse1" class="collapse custom-collapse">
+                    <div class="p-3 border rounded bg-light">
+                        <table class='table table-bordered'><thead><tr><th>Username</th><th>Date</th><th>Description</th><th>Amount</th></tr></thead><tbody><tr><td>Artem</td><td>2025-01-02</td><td>Cs.Money</td><td>596</td></tr><tr><td>Artem</td><td>2025-01-02</td><td>Cs.Money</td><td>2117</td></tr></tbody></table>
+
+                         
+                    </div>
+                </div>
+            </td>
+        </tr>
+         
+    
+        <!-- Main Row -->
+        <tr data-bs-toggle="collapse" data-bs-target="#collapse2" style="cursor: pointer;">
+            <td><strong>Різні магазини</strong></td>
+            <td>2082</td>
+        </tr>
+        <!-- Collapsible Row with Nested Table -->
+        <tr>
+            <td colspan="2">
+                <div id="collapse2" class="collapse custom-collapse">
+                    <div class="p-3 border rounded bg-light">
+                        <table class='table table-bordered'><thead><tr><th>Username</th><th>Date</th><th>Description</th><th>Amount</th></tr></thead><tbody><tr><td>Artem</td><td>2025-01-03</td><td>EVA</td><td>671</td></tr><tr><td>Artem</td><td>2025-01-03</td><td>APTEKA 32</td><td>40</td></tr><tr><td>Artem</td><td>2025-01-02</td><td>АНЦ</td><td>1371</td></tr></tbody></table>
+
+                         
+                    </div>
+                </div>
+            </td>
+        </tr>
+         
+    
+        <!-- Main Row -->
+        <tr data-bs-toggle="collapse" data-bs-target="#collapse3" style="cursor: pointer;">
+            <td><strong>Транспортування</strong></td>
+            <td>217</td>
+        </tr>
+        <!-- Collapsible Row with Nested Table -->
+        <tr>
+            <td colspan="2">
+                <div id="collapse3" class="collapse custom-collapse">
+                    <div class="p-3 border rounded bg-light">
+                        <table class='table table-bordered'><thead><tr><th>Username</th><th>Date</th><th>Description</th><th>Amount</th></tr></thead><tbody><tr><td>Ira</td><td>2024-12-30 00:00:00</td><td>Uklon</td><td>103</td></tr><tr><td>Ira</td><td>2024-12-30 00:00:00</td><td>Uklon</td><td>114</td></tr></tbody></table>
+
+                         
+                    </div>
+                </div>
+            </td>
+        </tr>
+         
+    
+        <!-- Main Row -->
+        <tr data-bs-toggle="collapse" data-bs-target="#collapse4" style="cursor: pointer;">
+            <td><strong>Фінанси</strong></td>
+            <td>17718</td>
+        </tr>
+        <!-- Collapsible Row with Nested Table -->
+        <tr>
+            <td colspan="2">
+                <div id="collapse4" class="collapse custom-collapse">
+                    <div class="p-3 border rounded bg-light">
+                        <table class='table table-bordered'><thead><tr><th>Username</th><th>Date</th><th>Description</th><th>Amount</th></tr></thead><tbody><tr><td>Artem</td><td>2025-01-04</td><td>Анатолій К.</td><td>715</td></tr><tr><td>Artem</td><td>2025-01-02</td><td>Від: Ірина Гузюнь</td><td>10462</td></tr><tr><td>Ira</td><td>2025-01-01 00:00:00</td><td>473121****6014</td><td>2448</td></tr><tr><td>Ira</td><td>2025-01-01 00:00:00</td><td>Часткове зняття банки «На амуніцію для 92»</td><td>2435</td></tr><tr><td>Ira</td><td>2024-12-30 00:00:00</td><td>Беззубка Мар'яна</td><td>1658</td></tr></tbody></table>
+
+                         
+                    </div>
+                </div>
+            </td>
+        </tr>
+         
+    
+        <!-- Main Row -->
+        <tr data-bs-toggle="collapse" data-bs-target="#collapse5" style="cursor: pointer;">
+            <td><strong>Харчування</strong></td>
+            <td>4666</td>
+        </tr>
+        <!-- Collapsible Row with Nested Table -->
+        <tr>
+            <td colspan="2">
+                <div id="collapse5" class="collapse custom-collapse">
+                    <div class="p-3 border rounded bg-light">
+                        <table class='table table-bordered'><thead><tr><th>Username</th><th>Date</th><th>Description</th><th>Amount</th></tr></thead><tbody><tr><td>Artem</td><td>2025-01-05</td><td>Glovo</td><td>434</td></tr><tr><td>Artem</td><td>2025-01-04</td><td>Glovo</td><td>291</td></tr><tr><td>Artem</td><td>2025-01-04</td><td>Скасування. Glovo</td><td>288</td></tr><tr><td>Artem</td><td>2025-01-03</td><td>Glovo</td><td>521</td></tr><tr><td>Artem</td><td>2025-01-03</td><td>SIMI #4133</td><td>91</td></tr><tr><td>Artem</td><td>2025-01-02</td><td>Glovo</td><td>288</td></tr><tr><td>Artem</td><td>2025-01-02</td><td>Сільпо</td><td>507</td></tr><tr><td>Artem</td><td>2024-12-31</td><td>SMMarket</td><td>105</td></tr><tr><td>Artem</td><td>2024-12-31</td><td>Сільпо</td><td>1274</td></tr><tr><td>Artem</td><td>2024-12-30</td><td>Glovo</td><td>498</td></tr><tr><td>Artem</td><td>2024-12-30</td><td>SIMI #4133</td><td>182</td></tr><tr><td>Artem</td><td>2024-12-30</td><td>ZERNO</td><td>120</td></tr><tr><td>Ira</td><td>2024-12-31 00:00:00</td><td>Сім-23</td><td>67</td></tr></tbody></table>
+
+                         
+                    </div>
+                </div>
+            </td>
+        </tr>
+         
+    </tbody></table>
+        </div>
+        <div class="card shadow-sm p-4 mt-4">
+            <h2 class="text-secondary">Budget limits</h2>
+                <h4 class="text-secondary">Weekly limits</h4>
+                    
+         <div class="alert alert-danger" role="alert">
+                        For cateopry Харчування. You exceeded the weekly limit.
+            </div>  
+        
+                    <h4 class="text-secondary">Monthly limits</h4>
+                    
+         <div class="alert alert-success" role="alert">
+                       For category Транспортування. You have 2000.0. UAH
+            </div>  
+        
+         <div class="alert alert-success" role="alert">
+                       For category Харчування. You have 12000.0. UAH
+            </div>  
+        
+        </div>  
+        
+        <div class="card shadow-sm p-4 mt-4">
+            <h2 class="text-secondary">Overall budget usage</h2>
+            <div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.0.0.min.js"></script>                <div id="8bdf7c00-883e-49ad-90fc-621515936336" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("8bdf7c00-883e-49ad-90fc-621515936336")) {                    Plotly.newPlot(                        "8bdf7c00-883e-49ad-90fc-621515936336",                        [{"hovertemplate":"user_name=Artem\u003cbr\u003ecategory=%{x}\u003cbr\u003eamount=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Artem","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"Artem","orientation":"v","showlegend":true,"textposition":"auto","x":["\u041a\u0432\u0430\u0440\u0442\u043f\u043b\u0430\u0442\u0430","\u041e\u043d\u043b\u0430\u0439\u043d-\u043c\u0430\u0439\u0434\u0430\u043d\u0447\u0438\u043a\u0438","\u0420\u0456\u0437\u043d\u0456 \u043c\u0430\u0433\u0430\u0437\u0438\u043d\u0438","\u0424\u0456\u043d\u0430\u043d\u0441\u0438","\u0425\u0430\u0440\u0447\u0443\u0432\u0430\u043d\u043d\u044f"],"xaxis":"x","y":{"dtype":"i2","bdata":"WBuZCiIIqSv3EQ=="},"yaxis":"y","type":"bar"},{"hovertemplate":"user_name=Ira\u003cbr\u003ecategory=%{x}\u003cbr\u003eamount=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Ira","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"Ira","orientation":"v","showlegend":true,"textposition":"auto","x":["\u0422\u0440\u0430\u043d\u0441\u043f\u043e\u0440\u0442\u0443\u0432\u0430\u043d\u043d\u044f","\u0424\u0456\u043d\u0430\u043d\u0441\u0438","\u0425\u0430\u0440\u0447\u0443\u0432\u0430\u043d\u043d\u044f"],"xaxis":"x","y":{"dtype":"i2","bdata":"2QCNGUMA"},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"category"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"amount"}},"legend":{"title":{"text":"user_name"},"tracegroupgap":0},"title":{"text":"Chart of budget usage per user"},"barmode":"relative"},                        {"responsive": true}                    )                };            </script>        </div>
+        </div>
+          
+        </div>
+     
+    </div>
+</body>
+</html>

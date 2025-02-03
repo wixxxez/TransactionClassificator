@@ -4,7 +4,8 @@ from aiogram.filters import CommandStart , Command
 from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 from aiogram.enums.parse_mode import ParseMode
- 
+from aiogram.types import InlineKeyboardMarkup, WebAppInfo
+
 import logging
 from ..utils.ConfigLoader import LoadUserConfigById
 from ..utils.Singleton import thread_safe_singleton
@@ -49,9 +50,9 @@ async def start(message: types.Message):
 
     keyboard = ReplyKeyboardBuilder()
     keyboard.row(KeyboardButton(text ="Load Data."))
-    keyboard.row(KeyboardButton(text ="Get report"))
+    keyboard.row(KeyboardButton(text ="Get report",web_app=WebAppInfo(url="report.html")))
     keyboard.row(KeyboardButton(text ="Get weekly balance report"))
-    keyboard.row(KeyboardButton(text ="Get monthly balance report"))
+    keyboard.row(KeyboardButton(text ="Get monthly balance report") )
     user_id =  message.from_user.id 
     
     bot = BotSubsystem()
@@ -70,28 +71,25 @@ async def instruction(message: types.Message):
     await message.answer(  "Data is saved"   )
      
 
-@dp.message(F.text == "Get report")
-async def instruction(message: types.Message):
-    user_id =  message.from_user.id 
-    bot = BotSubsystem()
+# @dp.message(F.text == "Get report")
+# async def instruction(message: types.Message):
+#     user_id =  message.from_user.id 
+#     bot = BotSubsystem()
 
-     
-    
-    dataset = Dataset(bot.config)
-    transaction_data = dataset.create_dataset()
-    report = OverallTransactionReport(transaction_data, dataset.get_balances())
-    response = report.get_markdown_response()
-    markdown = response.replace('-', '\\-').replace('.', '\\.').replace('|', '\\|')
+#     dataset = Dataset(bot.config)
+#     transaction_data = dataset.create_dataset()
+#     report = OverallTransactionReport(transaction_data, dataset.get_balances())
+#     response = report.get_markdown_response()
+#     markdown = response.replace('-', '\\-').replace('.', '\\.').replace('|', '\\|')
 
-    await message.answer(f"```\n{markdown}\n```", parse_mode=ParseMode.MARKDOWN_V2)
+#     kb_list = [InlineKeyboardMarkup(text ='OPA', callback_data='busness_group_details' )]
+#     await message.answer(f"```\n{markdown}\n```", parse_mode=ParseMode.MARKDOWN_V2)
      
 
 @dp.message(F.text == "Get weekly balance report")
 async def instruction(message: types.Message):
     user_id =  message.from_user.id 
     bot = BotSubsystem()
-
-     
     
     dataset = Dataset(bot.config)
     transaction_data = dataset.create_dataset()
