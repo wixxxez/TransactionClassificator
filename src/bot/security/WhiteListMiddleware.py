@@ -17,7 +17,7 @@ class WhiteListMiddleware(BaseMiddleware):
         ) -> Any:
             id = event.from_user.id
             if self.is_user_not_allowed(id):
-                await event.reply(f"You are not allowed to use this bot. ID {id} not in white list. ")
+                await event.reply(f"You are not allowed to use this bot. ID {id} not in the white list. ")
                 return 
             return await handler(event, data)
 

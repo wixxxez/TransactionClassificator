@@ -45,6 +45,20 @@ class OverallTransactionReport():
         self.dataset = dataset
         self.balance = balance
 
+    def get_transaction_report(self) -> pd.DataFrame: 
+
+        today = datetime.today()
+        current_week = today.isocalendar()[1]
+ 
+        dataset = self.dataset.query("week_number == @current_week").groupby( ['user_name', 'custom_category'] ).amount.sum().to_frame()
+
+        if len(dataset) == 0: 
+ 
+            raise RuntimeError("No transactions for current week.")
+        
+        dataset = dataset.reset_index().rename(columns={'custom_category':'category'})
+        return dataset
+    
     def get_markdown_response(self) : 
 
          
@@ -55,11 +69,11 @@ class OverallTransactionReport():
 
         if len(dataset) == 0: 
 
-            return "No transaction for current week."
+            return "No transactions for current week."
         
         return dataset.to_markdown()
     
-    def get_Weekly_balance_report(self) : 
+    def get_Weekly_balance_report(self, markdown = True): 
 
         data_full = self.dataset
         Balances = self.balance
@@ -80,9 +94,13 @@ class OverallTransactionReport():
                 balance_report_body = f"For category {category}. You exceeded the weekly limit."
 
             balance_report_body_list.append(balance_report_body)
-        return Weekly.to_markdown(), balance_report_body_list
+        
+        if markdown:
+            return Weekly.to_markdown(), balance_report_body_list
+        
+        else : return Weekly, balance_report_body_list
     
-    def get_month_balance_report(self): 
+    def get_month_balance_report(self, markdown = True): 
         data_full = self.dataset
         Balances = self.balance
         today = datetime.today()
@@ -104,6 +122,10 @@ class OverallTransactionReport():
             else :
                 balance_report_body = f"For category {category}. You exceeded the monthly limit."
             balance_report_body_list.append(balance_report_body)
-        return Monthly.to_markdown(), balance_report_body_list
+
+        if markdown :
+            return Monthly.to_markdown(), balance_report_body_list
+
+        else: return Monthly, balance_report_body_list
 
     

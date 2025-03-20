@@ -12,7 +12,7 @@ from ..utils.Singleton import thread_safe_singleton
 from ..utils.DataAquisitionJob import DataAcquisitionPipeline
 from .security.WhiteListMiddleware import WhiteListMiddleware
 from ..datatools.TransactionReport import OverallTransactionReport,Dataset
-
+from ..datatools.CreateHTMLReport import BuildHTMLReport
 
 dp = Dispatcher()
  
@@ -50,9 +50,9 @@ async def start(message: types.Message):
 
     keyboard = ReplyKeyboardBuilder()
     keyboard.row(KeyboardButton(text ="Load Data."))
-    keyboard.row(KeyboardButton(text ="Get report",web_app=WebAppInfo(url="report.html")))
-    keyboard.row(KeyboardButton(text ="Get weekly balance report"))
-    keyboard.row(KeyboardButton(text ="Get monthly balance report") )
+    keyboard.row(KeyboardButton(text ="Get report",web_app=WebAppInfo(url="https://wixxxez.github.io/TransactionClassificator/")))
+    keyboard.row(KeyboardButton(text ="Generate report"))
+     
     user_id =  message.from_user.id 
     
     bot = BotSubsystem()
@@ -71,56 +71,17 @@ async def instruction(message: types.Message):
     await message.answer(  "Data is saved"   )
      
 
-# @dp.message(F.text == "Get report")
-# async def instruction(message: types.Message):
-#     user_id =  message.from_user.id 
-#     bot = BotSubsystem()
-
-#     dataset = Dataset(bot.config)
-#     transaction_data = dataset.create_dataset()
-#     report = OverallTransactionReport(transaction_data, dataset.get_balances())
-#     response = report.get_markdown_response()
-#     markdown = response.replace('-', '\\-').replace('.', '\\.').replace('|', '\\|')
-
-#     kb_list = [InlineKeyboardMarkup(text ='OPA', callback_data='busness_group_details' )]
-#     await message.answer(f"```\n{markdown}\n```", parse_mode=ParseMode.MARKDOWN_V2)
-     
-
-@dp.message(F.text == "Get weekly balance report")
-async def instruction(message: types.Message):
-    user_id =  message.from_user.id 
-    bot = BotSubsystem()
-    
-    dataset = Dataset(bot.config)
-    transaction_data = dataset.create_dataset()
-    report = OverallTransactionReport(transaction_data, dataset.get_balances())
-    response, text = report.get_Weekly_balance_report()
-    markdown = response.replace('-', '\\-').replace('.', '\\.').replace('|', '\\|')
-
-    await message.answer(f"```\n{markdown}\n```", parse_mode=ParseMode.MARKDOWN_V2)
-    for i in text: 
-
-        await message.answer(i)
-
-
-
-@dp.message(F.text == "Get monthly balance report")
+@dp.message(F.text == "Generate report")
 async def instruction(message: types.Message):
     user_id =  message.from_user.id 
     bot = BotSubsystem()
 
+    HTMLBuilder = BuildHTMLReport(bot.config)
+
+    HTMLBuilder.build_report()
      
-    
-    dataset = Dataset(bot.config)
-    transaction_data = dataset.create_dataset()
-    report = OverallTransactionReport(transaction_data, dataset.get_balances())
-    response, text = report.get_month_balance_report()
-    markdown = response.replace('-', '\\-').replace('.', '\\.').replace('|', '\\|')
-
-    await message.answer(f"```\n{markdown}\n```", parse_mode=ParseMode.MARKDOWN_V2)
-    for i in text: 
-
-        await message.answer(i)
+    await message.answer(f"Report updated!")
+     
 
 @dp.message()
 async def echo(message: types.Message):
