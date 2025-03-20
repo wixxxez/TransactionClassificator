@@ -62,7 +62,7 @@ class BuildHTMLReport():
             # Generate nested table for detailed data
             details_html = "<table class='table table-bordered'><thead><tr><th>Username</th><th>Date</th><th>Description</th><th>Amount</th></tr></thead><tbody>"
             for _, detail_row in df_details[row['category']].iterrows():
-                details_html += f"<tr><td>{detail_row['user_name']}</td><td>{detail_row['full_date']}</td><td>{detail_row['description']}</td><td>{detail_row['amount']}</td></tr>"
+                details_html += f"<tr><td>{detail_row['user_name']}</td><td>{detail_row['full_date'].split(" ")[0]}</td><td>{detail_row['description']}</td><td>{detail_row['amount']}</td></tr>"
             details_html += f"</tbody></table>"
 
             table_html += f"""
