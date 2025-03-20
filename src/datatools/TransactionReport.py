@@ -88,10 +88,19 @@ class OverallTransactionReport():
             availible = category_df['Balance'] -category_df['amount']
             availible = availible[0]
             if availible > 0 : 
-                balance_report_body = f"For category {category}. You have {availible}. UAH"
-
+                balance_report_body = f"""
+                <div class="alert alert-success" role="alert">
+                            For category {category}. You have {availible}. UAH
+                    </div>  
+                """
+                
             else :
-                balance_report_body = f"For category {category}. You exceeded the weekly limit."
+                
+                balance_report_body = f"""
+                <div class="alert alert-danger" role="alert">
+                                For cateopry {category}. You exceeded the weekly limit.
+                    </div>  
+                """
 
             balance_report_body_list.append(balance_report_body)
         
@@ -117,10 +126,19 @@ class OverallTransactionReport():
             availible = category_df['Balance'] -category_df['amount']
             availible = availible.reset_index()[0][0]
             if availible > 0 : 
-                balance_report_body = f"For category {category}. You have {availible} UAH."
-
+                balance_report_body = f"""
+                <div class="alert alert-success" role="alert">
+                            For category {category}. You have {availible}. UAH
+                    </div>  
+                """
+                
             else :
-                balance_report_body = f"For category {category}. You exceeded the monthly limit."
+                
+                balance_report_body = f"""
+                <div class="alert alert-danger" role="alert">
+                                For cateopry {category}. You exceeded the monthly limit.
+                    </div>  
+                """
             balance_report_body_list.append(balance_report_body)
 
         if markdown :

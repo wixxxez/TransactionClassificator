@@ -39,8 +39,8 @@ class BuildHTMLReport():
         # Convert Plotly figure to HTML div
         plot_html = fig.to_html(full_html=False, include_plotlyjs="cdn")
 
-        weekly_limits, _ = self.transaction_serivce.get_Weekly_balance_report(markdown=False)
-        month_limits, _  = self.transaction_serivce.get_month_balance_report(markdown=False)
+        _, weekly_limits = self.transaction_serivce.get_Weekly_balance_report(markdown=False)
+        _, month_limits  = self.transaction_serivce.get_month_balance_report(markdown=False)
         # Generate collapsible table rows with nested tables
         table_html =f"""
         <table class="table table-striped table-hover">
