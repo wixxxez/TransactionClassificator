@@ -18,11 +18,18 @@ RUN curl -sSL https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64
 ENV PATH=/opt/conda/bin:$PATH
 
 # Clone your Git repository to the container (for continuous polling)
+RUN git clone https://github.com/wixxxez/TransactionClassificator /app
 
-# Create a Conda environment named "mono_classificator"
+
+# Set working directory to the application directory
+WORKDIR /app
+
  
+# Create a Conda environment named "mono_classificator"
+COPY env.yaml /app/
+
 # Assuming you have an environment.yml file to define your Conda environment
-RUN conda env create -f env.yaml
+RUN conda env create -f environment.yml
 
 # Activate the environment and install pip packages if needed
 RUN echo "conda activate mono_classificator" > ~/.bashrc
