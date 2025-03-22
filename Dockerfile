@@ -24,7 +24,7 @@ RUN git clone https://github.com/wixxxez/TransactionClassificator /app
 # Set working directory to the application directory
 WORKDIR /app
 
- 
+RUN git switch prod 
 # Create a Conda environment named "mono_classificator"
 COPY env.yaml /app/
 
