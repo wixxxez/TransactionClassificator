@@ -2,6 +2,7 @@ import pandas as pd
 from google.cloud import storage
 import io
 from datetime import datetime, timedelta
+import google.auth 
 
 def read_csv_from_gcs(path:str)->pd.DataFrame:
     """Download a CSV file from GCS and load it into Pandas DataFrame."""
@@ -45,7 +46,9 @@ def save_html_to_gcs(html_content, path):
     
 def generate_signed_url(bucket_name, blob_name, expiration_minutes=15):
     """Generate a signed URL for a file in GCS (valid for limited time)."""
-    client = storage.Client()
+
+    credentials, _ = google.auth.default()
+    client = storage.Client(credentials=credentials)
     bucket = client.bucket(bucket_name)
     blob = bucket.blob(blob_name)
 
