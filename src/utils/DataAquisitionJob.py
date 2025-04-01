@@ -19,8 +19,6 @@ class DataAcquisition():
         Today = time.strftime('%d/%m/%Y')
         to = time.mktime(datetime.strptime(Today, "%d/%m/%Y").timetuple())
         
-        MONOBANK_TOKEN = os.environ['MONO_TOKEN']
-        
         url = "https://api.monobank.ua/personal/statement/"  # Replace with the actual API endpoint URL
 
         data = {
