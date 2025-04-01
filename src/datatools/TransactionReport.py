@@ -1,11 +1,13 @@
 import pandas as pd
 import time
 from datetime import datetime
+from src.utils.GCSFileManager import read_csv_from_gcs
 
 class Dataset():
 
     def __init__(self, config:dict):
         
+        self.build_type = config['build']
         self.config = config['data_info']
 
     
@@ -13,9 +15,15 @@ class Dataset():
 
         """Return dataset created used config path"""
 
-        self.data = pd.read_csv(self.config['transaction_path'])
-        self.mcc = pd.read_csv(self.config['mcc_code_path'])
-        self.Balances = pd.read_csv(self.config['balances_table_path']) 
+        # if self.build_type == 'gcp': 
+        self.data = read_csv_from_gcs(self.config['transaction_path'])
+        self.mcc = read_csv_from_gcs(self.config['mcc_code_path'])
+        self.Balances = read_csv_from_gcs(self.config['balances_table_path']) 
+
+        # else:
+        #     self.data = pd.read_csv(self.config['transaction_path'])
+        #     self.mcc = pd.read_csv(self.config['mcc_code_path'])
+        #     self.Balances = pd.read_csv(self.config['balances_table_path']) 
 
         custom_categories = {
                     'MCC_Categories' :  [{'originalMcc' : '5812', 'custom_category': 'Харчування'},{'originalMcc' : '5499', 'custom_category': 'Харчування'},{'originalMcc' : '5411', 'custom_category': 'Харчування'}],

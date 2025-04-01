@@ -5,7 +5,7 @@ import json
 import time
 from datetime import datetime
 import pandas as pd
-
+from src.utils.GCSFileManager import upload_to_gcs, read_csv_from_gcs
 
 class DataAcquisition(): 
 
@@ -71,9 +71,9 @@ class DataPreprocessing():
 
 def save_data(data: pd.DataFrame):
 
-    old_data = pd.read_csv("./datasets/transaction_history.csv", index_col=0) 
+    old_data = read_csv_from_gcs("./datasets/transaction_history.csv", index_col=0) 
 
-    pd.concat([old_data, data]).drop_duplicates('id').to_csv("./datasets/transaction_history.csv")
+    upload_to_gcs(pd.concat([old_data, data]).drop_duplicates('id'), "home_bot_web_serivce/transaction_history.csv") 
 
 
     
