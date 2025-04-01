@@ -73,6 +73,6 @@ def start_bot(config):
     setup_application(app, dispatcher, bot=bot)
 
     # And finally start webserver
-    web.run_app(app, host= "0.0.0.0", port=8080)
+    web.run_app(app, host= "0.0.0.0", port=8000)
 
 
