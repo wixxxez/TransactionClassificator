@@ -8,7 +8,7 @@ from .bot import start_bot
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Hermes bot.')
     parser.add_argument(
-        '-c', '--config_file', type=str, default='gs://home_bot_web_serivce/bot_config.yaml', help='Bot configuretion file'
+        '-c', '--config_file', type=str, default='home_bot_web_serivce/bot_config.yaml', help='Bot configuretion file'
     )
     
 
