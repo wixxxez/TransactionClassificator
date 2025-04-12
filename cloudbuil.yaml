@@ -1,0 +1,14 @@
+steps:
+  # Auto-build Dockerfile still works automatically, no step needed
+
+  # Secret-aware deploy step
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'my-service'
+      - '--image=gcr.io/$PROJECT_ID/my-service'
+      - '--region=us-central1'
+      - '--update-secrets=keyjson=my-service-key:latest'
+      - '--allow-unauthenticated'
