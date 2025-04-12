@@ -69,11 +69,11 @@ class DataPreprocessing():
 
         return mono_df
 
-def save_data(data: pd.DataFrame):
+def save_data(data: pd.DataFrame, transaction_path:str):
 
-    old_data = read_csv_from_gcs("./datasets/transaction_history.csv", index_col=0) 
+    old_data = read_csv_from_gcs(transaction_path, index_col=0) 
 
-    upload_to_gcs(pd.concat([old_data, data]).drop_duplicates('id'), "home_bot_web_serivce/transaction_history.csv") 
+    upload_to_gcs(pd.concat([old_data, data]).drop_duplicates('id'), transaction_path) 
 
 
     
@@ -88,7 +88,7 @@ class DataAcquisitionPipeline():
 
         
     
-    def run(self):
+    def run(self, transaction_path):
 
         data_acq = DataAcquisition(self.mono_token, self.mono_acc)
 
@@ -96,7 +96,7 @@ class DataAcquisitionPipeline():
         
         processing_pipe = DataPreprocessing(self.telegram_id,self.name)
         preprocessed_data = processing_pipe.run(data)
-        save_data(preprocessed_data)
+        save_data(preprocessed_data,transaction_path)
         
          
 

@@ -7,7 +7,7 @@ class Dataset():
 
     def __init__(self, config:dict):
         
-        self.build_type = config['build']
+        
         self.config = config['data_info']
 
     
