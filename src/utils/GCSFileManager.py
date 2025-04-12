@@ -47,8 +47,8 @@ def save_html_to_gcs(html_content, path):
 def generate_signed_url(bucket_name, blob_name, expiration_minutes=15):
     """Generate a signed URL for a file in GCS (valid for limited time)."""
 
-    credentials, _ = google.auth.default()
-    client = storage.Client(credentials=credentials)
+     
+    client = storage.Client.from_service_account_json("key.json")
     bucket = client.bucket(bucket_name)
     blob = bucket.blob(blob_name)
 

@@ -9,5 +9,3 @@ CMD ["python3", "-m", "src.bot.app"]
 
 EXPOSE 8000
  
- 
- 
