@@ -34,6 +34,7 @@ def upload_to_gcs(df: pd.DataFrame, path: str):
 
     # Upload CSV file to GCS
     blob.upload_from_string(csv_buffer.getvalue(), content_type="text/csv")
+    
 
 def save_html_to_gcs(html_content, path):
     """Saves an HTML file to Google Cloud Storage."""
