@@ -48,7 +48,7 @@ def generate_signed_url(bucket_name, blob_name, expiration_minutes=15):
     """Generate a signed URL for a file in GCS (valid for limited time)."""
 
      
-    client = storage.Client.from_service_account_json("key.json")
+    client = storage.Client.from_service_account_json("/secrets/keyjson")
     bucket = client.bucket(bucket_name)
     blob = bucket.blob(blob_name)
 
