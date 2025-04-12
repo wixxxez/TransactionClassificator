@@ -6,10 +6,12 @@ from aiogram.enums.parse_mode import ParseMode
 from aiogram.types import InlineKeyboardMarkup, WebAppInfo
 from src.bot.bot import dp, BotSubsystem
 from src.utils.ConfigLoader import LoadUserConfigById
-from src.utils.DataAquisitionJob import DataAcquisitionPipeline
+from src.utils.DataAquisitionJob import DataAcquisitionPipeline, save_data
 from src.datatools.TransactionReport import OverallTransactionReport,Dataset
 from src.datatools.CreateHTMLReport import BuildHTMLReport
 from src.utils.GCSFileManager import generate_signed_url
+
+import pandas as pd
 
 @dp.message(Command('start'))
 async def start(message: types.Message):
@@ -30,10 +32,14 @@ async def start(message: types.Message):
 async def instruction(message: types.Message):
     user_id =  message.from_user.id 
     bot = BotSubsystem()
-    for user_cfg in bot.config['users']: 
+    loaded_history = []
+    for user_cfg in bot.config['users']:
+        await message.answer(f"Loading data for user: {user_cfg['name']} ") 
         pipeline = DataAcquisitionPipeline(**user_cfg)
-        pipeline.run(bot.config['data_info']['transaction_path'])
-        await message.answer(f"Loading data for user: {user_cfg['name']} ")
+        data = pipeline.run()
+        loaded_history.append(data)
+
+    save_data(pd.concat(loaded_history).reset_index(drop=True),bot.config['data_info']['transaction_path'])    
     await message.answer(  "Data is saved"   )
      
 

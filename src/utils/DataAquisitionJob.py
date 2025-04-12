@@ -88,7 +88,7 @@ class DataAcquisitionPipeline():
 
         
     
-    def run(self, transaction_path):
+    def run(self) -> pd.DataFrame:
 
         data_acq = DataAcquisition(self.mono_token, self.mono_acc)
 
@@ -96,7 +96,8 @@ class DataAcquisitionPipeline():
         
         processing_pipe = DataPreprocessing(self.telegram_id,self.name)
         preprocessed_data = processing_pipe.run(data)
-        save_data(preprocessed_data,transaction_path)
+        
+        return preprocessed_data
         
          
 
