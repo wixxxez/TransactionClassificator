@@ -39,7 +39,7 @@ async def instruction(message: types.Message):
         data = pipeline.run()
         loaded_history.append(data)
 
-    save_data(pd.concat(loaded_history).reset_index(drop=True),bot.config['data_info']['transaction_path'])    
+    save_data(pd.concat(loaded_history),bot.config['data_info']['transaction_path'])    
     await message.answer(  "Data is saved"   )
      
 

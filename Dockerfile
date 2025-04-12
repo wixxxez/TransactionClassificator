@@ -2,6 +2,7 @@ FROM python:3.12.7
 
  
 COPY . ./
+ENV TZ=Europe/Kiev
 
 RUN pip install -r requirements.txt  
 
