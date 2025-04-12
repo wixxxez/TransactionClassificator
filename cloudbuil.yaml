@@ -7,8 +7,8 @@ steps:
     args:
       - 'run'
       - 'deploy'
-      - 'my-service'
-      - '--image=gcr.io/$PROJECT_ID/my-service'
-      - '--region=us-central1'
+      - 'hermes'
+      - '--image=gcr.io/homeassistant-454511/hermes'
+      - '--region=europe-north1'
       - '--update-secrets=keyjson=my-service-key:latest'
       - '--allow-unauthenticated'
