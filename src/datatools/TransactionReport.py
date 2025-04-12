@@ -26,7 +26,7 @@ class Dataset():
         #     self.Balances = pd.read_csv(self.config['balances_table_path']) 
 
         custom_categories = {
-                    'MCC_Categories' :  [{'originalMcc' : '5812', 'custom_category': 'Харчування'},{'originalMcc' : '5499', 'custom_category': 'Харчування'},{'originalMcc' : '5411', 'custom_category': 'Харчування'}],
+                    'MCC_Categories' :  [{'originalMcc' : '5814', 'custom_category': 'Харчування'},{'originalMcc' : '5812', 'custom_category': 'Харчування'},{'originalMcc' : '5499', 'custom_category': 'Харчування'},{'originalMcc' : '5411', 'custom_category': 'Харчування'}],
                     'Description_Categories' : [{'description' : 'Петро С.', 'custom_category': 'Квартплата'} , {'description': '535129****2010', 'custom_category': 'Комунальний платіж'}]
                     }
         self.data = self.data.merge(self.mcc , on = 'originalMcc')
