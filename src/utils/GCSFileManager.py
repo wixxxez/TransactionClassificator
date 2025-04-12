@@ -4,7 +4,7 @@ import io
 from datetime import datetime, timedelta
 import google.auth 
 
-def read_csv_from_gcs(path:str)->pd.DataFrame:
+def read_csv_from_gcs(path:str, index_col:int = None)->pd.DataFrame:
     """Download a CSV file from GCS and load it into Pandas DataFrame."""
 
     bucket_name, file_name = path.split('/')
@@ -16,7 +16,9 @@ def read_csv_from_gcs(path:str)->pd.DataFrame:
     csv_data = blob.download_as_bytes()
 
     # Read the CSV file into a Pandas DataFrame
-    df = pd.read_csv(io.BytesIO(csv_data))
+    
+    df = pd.read_csv(io.BytesIO(csv_data), index_col=index_col)
+  
     return df
 
 
