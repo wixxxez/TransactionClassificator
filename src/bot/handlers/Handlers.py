@@ -30,6 +30,7 @@ async def start(message: types.Message):
 
 @dp.message(F.text == "Load Data.")
 async def instruction(message: types.Message):
+    await message.answer("Processing...")
     user_id =  message.from_user.id 
     bot = BotSubsystem()
     loaded_history = []
@@ -45,6 +46,7 @@ async def instruction(message: types.Message):
 
 @dp.message(F.text == "Generate report")
 async def instruction(message: types.Message):
+    await message.answer("Processing...")
     user_id =  message.from_user.id 
     bot = BotSubsystem()
 
