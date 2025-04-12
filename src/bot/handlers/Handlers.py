@@ -32,7 +32,7 @@ async def instruction(message: types.Message):
     bot = BotSubsystem()
     for user_cfg in bot.config['users']: 
         pipeline = DataAcquisitionPipeline(**user_cfg)
-        pipeline.run()
+        pipeline.run(bot.config['data_info']['transaction_path'])
         await message.answer(f"Loading data for user: {user_cfg['name']} ")
     await message.answer(  "Data is saved"   )
      
