@@ -10,5 +10,5 @@ steps:
       - 'hermes'
       - '--image=gcr.io/homeassistant-454511/hermes'
       - '--region=europe-north1'
-      - '--update-secrets=keyjson=my-service-key:latest'
+      - '--mount-secrets=keyjson=my-service-key:latest'
       - '--allow-unauthenticated'
