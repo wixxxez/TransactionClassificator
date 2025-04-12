@@ -71,7 +71,7 @@ class DataPreprocessing():
 
 def save_data(data: pd.DataFrame, transaction_path:str):
 
-    old_data = read_csv_from_gcs(transaction_path, index_col=0) 
+    old_data = read_csv_from_gcs(transaction_path) 
 
     upload_to_gcs(pd.concat([old_data, data]).drop_duplicates('id'), transaction_path) 
 
