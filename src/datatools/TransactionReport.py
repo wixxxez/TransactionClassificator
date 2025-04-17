@@ -86,7 +86,7 @@ class OverallTransactionReport():
         data_full = self.dataset
         Balances = self.balance
         today = datetime.today()
-        current_week = today.isocalendar()
+        current_week = today.isocalendar()[1]
         Weekly = data_full.query("week_number == @current_week").groupby( ['custom_category'] ).amount.sum().reset_index().merge(Balances.query('Period == "w"'),how='right')
         Weekly = Weekly.fillna(0)
         balance_report_body_list = []
