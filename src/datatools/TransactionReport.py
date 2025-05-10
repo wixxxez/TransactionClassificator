@@ -1,10 +1,12 @@
 import pandas as pd
 import time
 from datetime import datetime
+from src.utils.GCSFileManager import read_csv_from_gcs
 
 class Dataset():
 
     def __init__(self, config:dict):
+        
         
         self.config = config['data_info']
 
@@ -13,12 +15,18 @@ class Dataset():
 
         """Return dataset created used config path"""
 
-        self.data = pd.read_csv(self.config['transaction_path'])
-        self.mcc = pd.read_csv(self.config['mcc_code_path'])
-        self.Balances = pd.read_csv(self.config['balances_table_path']) 
+        # if self.build_type == 'gcp': 
+        self.data = read_csv_from_gcs(self.config['transaction_path'])
+        self.mcc = read_csv_from_gcs(self.config['mcc_code_path'])
+        self.Balances = read_csv_from_gcs(self.config['balances_table_path']) 
+
+        # else:
+        #     self.data = pd.read_csv(self.config['transaction_path'])
+        #     self.mcc = pd.read_csv(self.config['mcc_code_path'])
+        #     self.Balances = pd.read_csv(self.config['balances_table_path']) 
 
         custom_categories = {
-                    'MCC_Categories' :  [{'originalMcc' : '5812', 'custom_category': 'Харчування'},{'originalMcc' : '5499', 'custom_category': 'Харчування'},{'originalMcc' : '5411', 'custom_category': 'Харчування'}],
+                    'MCC_Categories' :  [{'originalMcc' : '5814', 'custom_category': 'Харчування'},{'originalMcc' : '5812', 'custom_category': 'Харчування'},{'originalMcc' : '5499', 'custom_category': 'Харчування'},{'originalMcc' : '5411', 'custom_category': 'Харчування'}],
                     'Description_Categories' : [{'description' : 'Петро С.', 'custom_category': 'Квартплата'} , {'description': '535129****2010', 'custom_category': 'Комунальний платіж'}]
                     }
         self.data = self.data.merge(self.mcc , on = 'originalMcc')
@@ -77,8 +85,9 @@ class OverallTransactionReport():
 
         data_full = self.dataset
         Balances = self.balance
-
-        Weekly = data_full.query("week_number == 1").groupby( ['custom_category'] ).amount.sum().reset_index().merge(Balances.query('Period == "w"'),how='right')
+        today = datetime.today()
+        current_week = today.isocalendar()[1]
+        Weekly = data_full.query("week_number == @current_week").groupby( ['custom_category'] ).amount.sum().reset_index().merge(Balances.query('Period == "w"'),how='right')
         Weekly = Weekly.fillna(0)
         balance_report_body_list = []
         for category in Weekly.custom_category.unique():

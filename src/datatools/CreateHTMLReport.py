@@ -1,8 +1,10 @@
 from datetime import datetime
 from .TransactionReport import OverallTransactionReport, Dataset
+from src.utils.GCSFileManager import save_html_to_gcs
 
 import pandas as pd
 import plotly.express as px
+
 
 class BuildHTMLReport():
 
@@ -136,6 +138,8 @@ class BuildHTMLReport():
         """
 
         # Save the report as an HTML file
-        with open("index.html", "w", encoding="utf-8") as f:
-            f.write(html_template)
+        # with open("index.html", "w", encoding="utf-8") as f:
+        #     f.write(html_template)
+
+        save_html_to_gcs(html_template, 'home_bot_web_serivce/index.html')
 

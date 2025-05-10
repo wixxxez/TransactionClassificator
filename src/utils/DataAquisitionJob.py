@@ -5,7 +5,7 @@ import json
 import time
 from datetime import datetime
 import pandas as pd
-
+from src.utils.GCSFileManager import upload_to_gcs, read_csv_from_gcs
 
 class DataAcquisition(): 
 
@@ -18,8 +18,6 @@ class DataAcquisition():
 
         Today = time.strftime('%d/%m/%Y')
         to = time.mktime(datetime.strptime(Today, "%d/%m/%Y").timetuple())
-        
-        MONOBANK_TOKEN = os.environ['MONO_TOKEN']
         
         url = "https://api.monobank.ua/personal/statement/"  # Replace with the actual API endpoint URL
 
@@ -71,11 +69,11 @@ class DataPreprocessing():
 
         return mono_df
 
-def save_data(data: pd.DataFrame):
+def save_data(data: pd.DataFrame, transaction_path:str):
 
-    old_data = pd.read_csv("./datasets/transaction_history.csv", index_col=0) 
+    old_data = read_csv_from_gcs(transaction_path) 
 
-    pd.concat([old_data, data]).drop_duplicates('id').to_csv("./datasets/transaction_history.csv")
+    upload_to_gcs(pd.concat([old_data, data]).drop_duplicates('id'), transaction_path) 
 
 
     
@@ -90,7 +88,7 @@ class DataAcquisitionPipeline():
 
         
     
-    def run(self):
+    def run(self) -> pd.DataFrame:
 
         data_acq = DataAcquisition(self.mono_token, self.mono_acc)
 
@@ -98,7 +96,8 @@ class DataAcquisitionPipeline():
         
         processing_pipe = DataPreprocessing(self.telegram_id,self.name)
         preprocessed_data = processing_pipe.run(data)
-        save_data(preprocessed_data)
+        
+        return preprocessed_data
         
          
 

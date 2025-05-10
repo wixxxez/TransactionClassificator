@@ -1,0 +1,14 @@
+steps:
+  # Auto-build Dockerfile still works automatically, no step needed
+
+  # Secret-aware deploy step
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'hermes'
+      - '--image=gcr.io/homeassistant-454511/hermes'
+      - '--region=europe-north1'
+      - '--mount-secrets=keyjson=my-service-key:latest'
+      - '--allow-unauthenticated'

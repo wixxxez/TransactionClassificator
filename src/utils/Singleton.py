@@ -1,9 +1,5 @@
 import threading
 
-### Allows only one oppened connection to GPT we used it to reduce costs. 
-### In multi-threaded applications, I need to ensure that the Singleton is thread-safe. 
-
-
 def thread_safe_singleton(cls):
     instances = {}
     lock = threading.Lock()
